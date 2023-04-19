@@ -729,7 +729,7 @@ public class A implements Serializable {
 <!-- style="font-size:20px;"-->
 click on the below link for the complete code example:
 
-https://github.com/dharmananda4444/Design-Patterns/blob/version-1.0/README.md
+https://github.com/dharmananda4444/Design-Patterns/tree/version-1.0/code/singleton
 
 
 #### Outputs
@@ -1390,5 +1390,1978 @@ public class ObjectPoolDemo{
 <br>
 
 ![output](images/dp15.png)
+
+
+
+# Structural design patterns
+
+<br>
+
+* Structural design patterns are concerned with how classes and objects can be composed, to form larger structures.
+
+* The structural design patterns simplifies the structure by identifying the relationships.
+
+* These patterns focus on, how the classes inherit from each other and how they are composed from other classes.
+
+<br>
+
+<!-- style="font-size:20px;"--> 
+**Types of structural design patterns**
+
+There are following 7 types of structural design patterns.
+
+<!-- style="font-size:20px;"-->
+1. [Adapter Pattern](#adapter-pattern)
+Adapting an interface into another according to client expectation.
+
+<!-- style="font-size:20px;"-->
+2. [Bridge Pattern](#bridge-pattern)
+Separating abstraction (interface) from implementation.
+
+<!-- style="font-size:20px;"-->
+3. [Composite Pattern](#composite-pattern)
+Allowing clients to operate on hierarchy of objects.
+
+<!-- style="font-size:20px;"-->
+4. [Decorator Pattern](#decorator-pattern)
+Adding functionality to an object dynamically.
+
+<!-- style="font-size:20px;"-->
+5. [Facade Pattern](#facade-pattern)
+Providing an interface to a set of interfaces.
+
+<!-- style="font-size:20px;"-->
+6. [Flyweight Pattern](#flyweight-pattern)
+Reusing an object by sharing it.
+
+<!-- style="font-size:20px;"-->
+7. [proxy Pattern](#proxy-pattern)
+Representing another object.
+
+## Adapter Pattern
+
+<br>
+
+* An Adapter Pattern says that just "**converts the interface of a class into another interface that a client wants**".
+
+* In other words, to provide the interface according to client requirement while using the services of a class with a different interface.
+
+* The Adapter Pattern is also known as Wrapper.
+
+<br>
+
+<!-- style="font-size:20px;"-->
+**Advantage of Adapter Pattern**
+
+<br>
+
+* It allows two or more previously incompatible objects to interact.
+* It allows reusability of existing functionality.
+
+<br>
+
+<!-- style="font-size:20px;"-->
+**Usage of Adapter pattern:**
+
+<br>
+
+* When an object needs to utilize an existing class with an incompatible interface.
+* When you want to create a reusable class that cooperates with classes which don't have compatible interfaces.
+* When you want to create a reusable class that cooperates with classes which don't have compatible interfaces.
+
+### UML for Adapter Pattern:
+
+<br>
+
+The following are the specifications for the adapter pattern:
+
+**Target Interface :** This is the desired interface class which will be used by the clients.
+
+**Adapter class :** This class is a wrapper class which implements the desired target interface and modifies the specific request available from the Adaptee class.
+
+**Adaptee class :** This is the class which is used by the Adapter class to reuse the existing functionality and modify them for desired use.
+
+**Client :** This class will interact with the Adapter class.
+
+<br>
+
+![Uml](images/dp16.png)
+
+
+### Example of Adapter Pattern
+
+<br>
+
+<!-- style="font-size:20px;"-->
+1. [Create a CreditCard interface (Target interface).](#create-a-creditcard-interface)
+
+<!-- style="font-size:20px;"-->
+2. [Create a BankDetails class (Adaptee class).](#create-a-bankdetails-class)
+
+<!-- style="font-size:20px;"-->
+3. [Create a BankCustomer class (Adapter class).](#create-a-bankcustomer-class)
+
+<!-- style="font-size:20px;"-->
+4. [Create a AdapterPatternDemo class (client class).](#create-a-adapterpatterndemo-class)
+
+#### Create a CreditCard interface
+
+<br>
+
+* Create a CreditCard interface (Target interface).
+
+```java
+public interface CreditCard {  
+    public void giveBankDetails();  
+    public String getCreditCard();  
+}// End of the CreditCard interface. 
+``` 
+
+#### Create a BankDetails class
+
+<br>
+
+* Create a BankDetails class (Adaptee class).
+
+**File: BankDetails.java**
+
+```java
+// This is the adapter class.  
+public class BankDetails{  
+    private String bankName;  
+    private String accHolderName;  
+    private long accNumber;  
+      
+    public String getBankName() {  
+        return bankName;  
+    }  
+    public void setBankName(String bankName) {  
+        this.bankName = bankName;  
+    }  
+    public String getAccHolderName() {  
+        return accHolderName;  
+    }  
+    public void setAccHolderName(String accHolderName) {  
+        this.accHolderName = accHolderName;  
+    }  
+    public long getAccNumber() {  
+        return accNumber;  
+    }  
+    public void setAccNumber(long accNumber) {  
+        this.accNumber = accNumber;  
+    }  
+}// End of the BankDetails class. 
+``` 
+
+#### Create a BankCustomer class
+
+<br>
+
+* Create a BankCustomer class (Adapter class).
+
+**File: BankCustomer.java**
+
+```java
+// This is the adapter class  
+  
+import java.io.BufferedReader;  
+import java.io.InputStreamReader;  
+public class BankCustomer extends BankDetails implements CreditCard {  
+ public void giveBankDetails(){  
+  try{  
+   BufferedReader br=new BufferedReader(new InputStreamReader(System.in));  
+      
+   System.out.print("Enter the account holder name :");  
+   String customername=br.readLine();  
+   System.out.print("\n");  
+      
+   System.out.print("Enter the account number:");  
+   long accno=Long.parseLong(br.readLine());  
+   System.out.print("\n");  
+      
+   System.out.print("Enter the bank name :");  
+   String bankname=br.readLine();  
+      
+   setAccHolderName(customername);  
+   setAccNumber(accno);  
+   setBankName(bankname);  
+   }catch(Exception e){  
+        e.printStackTrace();  
+   }  
+  }  
+  @Override  
+  public String getCreditCard() {  
+   long accno=getAccNumber();  
+   String accholdername=getAccHolderName();  
+   String bname=getBankName();  
+          
+   return ("The Account number "+accno+" of "+accholdername+" in "+bname+ "  
+                        bank is valid and authenticated for issuing the credit card. ");  
+  }  
+}//End of the BankCustomer class.  
+```
+
+#### Create a AdapterPatternDemo class
+
+<br>
+
+* Create a AdapterPatternDemo class (client class).
+
+**File: AdapterPatternDemo.java**
+
+```java
+//This is the client class.  
+public class AdapterPatternDemo {  
+ public static void main(String args[]){  
+  CreditCard targetInterface=new BankCustomer();  
+  targetInterface.giveBankDetails();  
+  System.out.print(targetInterface.getCreditCard());  
+ }   
+}//End of the BankCustomer class. 
+```
+
+#### Output
+
+<br>
+
+![output](images/dp17.png)
+
+
+## Bridge Pattern
+
+<br>
+
+* A Bridge Pattern says that just "decouple the functional abstraction from the implementation so that the two can vary independently".
+
+* The Bridge Pattern is also known as Handle or Body.
+
+<br>
+
+<!--style="font-size:20px" -->
+Advantage of Bridge Pattern
+
+* It enables the separation of implementation from the interface.
+* It improves the extensibility.
+* It allows the hiding of implementation details from the client.
+
+<br>
+
+<!--style="font-size:20px" -->
+Usage of Bridge Pattern
+
+* When you don't want a permanent binding between the functional abstraction and its implementation.
+* When both the functional abstraction and its implementation need to extended using sub-classes.
+* It is mostly used in those places where changes are made in the implementation does not affect the clients.
+
+### UML for Bridge Pattern
+
+![Uml](images/dp18.png)
+
+
+### Example of Bridge Pattern
+
+<br>
+
+<!--style="font-size:20px" -->
+1. [Create a Question interface](#create-a-question-interface)
+
+<!--style="font-size:20px" -->
+2. [Create a JavaQuestions implementation](#create-a-javaquestions-implementation)
+
+<!--style="font-size:20px" -->
+3. [Create a QuestionManager class](#create-a-questionmanager-class)
+
+<!--style="font-size:20px" -->
+4. [Create a QuestionFormat class](#create-a-questionformat-class)
+
+<!--style="font-size:20px" -->
+5. [Create a BridgePatternDemo class](#create-a-bridgepatterndemo-class)
+
+#### Create a Question interface
+
+<br>
+
+* Create a Question interface that provides the navigation from one question to another or vice-versa.
+
+```java
+// this is the Question interface.  
+public interface Question {  
+    public void nextQuestion();  
+    public void previousQuestion();  
+    public void newQuestion(String q);  
+    public void deleteQuestion(String q);  
+    public void displayQuestion();  
+    public void displayAllQuestions();  
+}  
+// End of the Question interface. 
+``` 
+
+#### Create a JavaQuestions implementation
+
+* Create a JavaQuestions implementation class that will implement Question interface.
+
+```java
+// this is the JavaQuestions class.  
+import java.util.ArrayList;  
+import java.util.List;  
+public class JavaQuestions implements Question {  
+ private List <String> questions = new ArrayList<String>();  
+ private int current = 0;  
+ public JavaQuestions(){  
+    questions.add("What is class? ");  
+    questions.add("What is interface? ");  
+    questions.add("What is abstraction? ");  
+    questions.add("How multiple polymorphism is achieved in java? ");  
+    questions.add("How many types of exception  handling are there in java? ");  
+    questions.add("Define the keyword final for  variable, method, and class in java? ");  
+    questions.add("What is abstract class? ");  
+    questions.add("What is multi-threading? ");  
+ }  
+ public void nextQuestion() {  
+    if( current <= questions.size()-1 )  
+    current++;  
+    System.out.print(current);  
+ }  
+  
+ public void previousQuestion() {  
+    if( current > 0 )  
+    current--;  
+ }  
+  
+ public void newQuestion(String quest) {  
+    questions.add(quest);  
+ }  
+  
+ public void deleteQuestion(String quest) {  
+    questions.remove(quest);  
+ }  
+  
+ public void displayQuestion() {  
+    System.out.println( questions.get(current) );  
+ }  
+ public void displayAllQuestions() {  
+    for (String quest : questions) {  
+    System.out.println(quest);  
+ }  
+}  
+}// End of the JavaQuestions class.  
+```
+
+#### Create a QuestionManager class
+
+<br>
+
+* Create a QuestionManager class that will use Question interface which will act as a bridge..
+
+```java
+// this is the QuestionManager class.  
+public class QuestionManager  {  
+    protected Question q;  
+    public String catalog;  
+    public QuestionManager(String catalog) {  
+    this.catalog=catalog;  
+    }  
+    public void next() {  
+    q.nextQuestion();  
+    }  
+    public void previous() {  
+    q.previousQuestion();  
+    }  
+    public void newOne(String quest) {  
+    q.newQuestion(quest);  
+    }  
+    public void delete(String quest) {  
+    q.deleteQuestion(quest);  
+    }  
+    public void display() {  
+    q.displayQuestion();  
+    }  
+    public void displayAll() {  
+        System.out.println("Question Paper: " + catalog);  
+    q.displayAllQuestions();  
+    }  
+}// End of the QuestionManager class.  
+```
+
+#### Create a QuestionFormat class
+
+<br>
+
+* Create a QuestionFormat class that will extend the QuestionManager class
+
+```java
+// this is the QuestionFormat class.  
+public class QuestionFormat extends QuestionManager {  
+    public QuestionFormat(String catalog){  
+        super(catalog);  
+    }  
+    public void displayAll() {  
+        System.out.println("\n---------------------------------------------------------");  
+        super.displayAll();  
+        System.out.println("-----------------------------------------------------------");  
+    }  
+}// End of the QuestionFormat class.  
+```
+
+#### Create a BridgePatternDemo class
+
+<br>
+
+* Create a BridgePatternDemo class.
+
+```java
+// this is the BridgePatternDemo class.  
+public class BridgePatternDemo {  
+    public static void main(String[] args) {  
+    QuestionFormat questions = new QuestionFormat("Java Programming Language");  
+    questions.q = new JavaQuestions();  
+        questions.delete("what is class?");  
+        questions.display();  
+    questions.newOne("What is inheritance? ");  
+      
+    questions.newOne("How many types of inheritance are there in java?");  
+    questions.displayAll();  
+    }  
+}// End of the BridgePatternDemo class. 
+``` 
+
+#### Output
+
+<br>
+
+![output](images/dp19.png)
+
+
+## Composite Pattern
+
+<br>
+
+A Composite Pattern says that just "allow clients to operate in generic manner on objects that may or may not represent a hierarchy of objects".
+
+<!-- style="font-size:20px;"-->
+Advantage of Composite Design Pattern
+
+* It defines class hierarchies that contain primitive and complex objects.
+* It makes easier to you to add new kinds of components.
+* It provides flexibility of structure with manageable class or interface.
+
+<br>
+
+<!-- style="font-size:20px;"-->
+Usage of Composite Pattern
+
+**It is used:**
+
+* When you want to represent a full or partial hierarchy of objects.
+* When the responsibilities are needed to be added dynamically to the individual objects without affecting other objects. Where the responsibility of object may vary from time to time.
+
+### UML for Composite Pattern
+
+<br>
+
+![Uml](images/dp20.png)
+
+### Elements used in Composite Pattern:
+
+<br>
+
+**1. Component**
+
+Declares interface for objects in composition.
+Implements default behavior for the interface common to all classes as appropriate.
+Declares an interface for accessing and managing its child components.
+
+**2. Leaf**
+
+Represents leaf objects in composition. A leaf has no children.
+Defines behavior for primitive objects in the composition.
+
+**3. Composite**
+
+Defines behavior for components having children.
+Stores child component.
+Implements child related operations in the component interface.
+
+**4. Client**
+
+Manipulates objects in the composition through the component interface.
+
+### Example of Composite Pattern
+
+<br>
+
+<!-- style="font-size:20px;"-->
+1. [Create an Employee interface](#create-an-employee-interface)
+
+<!-- style="font-size:20px;"-->
+2. [Create a BankManager class](#create-a-bankmanager-class)  
+
+<!-- style="font-size:20px;"-->
+3. [Create a Cashier class](#create-a-cashier-class)
+
+<!-- style="font-size:20px;"-->
+4. [Create a Accountant class](#create-a-accountant-class)
+
+<!-- style="font-size:20px;"-->
+5. [Create a CompositePatternDemo class](#create-a-compositepatterndemo-class)
+
+
+#### Create an Employee interface
+
+<br>
+
+* Create an Employee interface that will be treated as a component.
+
+```java
+// this is the Employee interface i.e. Component.  
+public interface Employee {  
+    public  int getId();  
+    public String getName();  
+    public double getSalary();  
+       public void print();  
+    public void add(Employee employee);  
+       public void remove(Employee employee);  
+       public Employee getChild(int i);  
+}// End of the Employee interface. 
+``` 
+
+#### Create a BankManager class
+
+<br>
+
+* Create a BankManager class that will be treated as a Composite and implements Employee interface.
+
+**File: BankManager.java**
+
+```java
+// this is the BankManager class i.e. Composite.  
+import java.util.ArrayList;  
+import java.util.Iterator;  
+import java.util.List;  
+public class BankManager implements Employee {  
+     private int id;  
+     private String name;  
+     private double salary;  
+  
+     public BankManager(int id,String name,double salary) {  
+      this.id=id;      
+      this.name = name;  
+      this.salary = salary;  
+     }  
+         List<Employee> employees = new ArrayList<Employee>();  
+     @Override  
+     public void add(Employee employee) {  
+        employees.add(employee);  
+     }  
+        @Override  
+     public Employee getChild(int i) {  
+      return employees.get(i);  
+     }  
+     @Override  
+     public void remove(Employee employee) {  
+      employees.remove(employee);  
+     }    
+     @Override  
+     public int getId()  {  
+      return id;  
+     }  
+     @Override  
+     public String getName() {  
+      return name;  
+     }  
+    @Override  
+     public double getSalary() {  
+      return salary;  
+     }  
+     @Override  
+     public void print() {  
+      System.out.println("==========================");  
+      System.out.println("Id ="+getId());  
+      System.out.println("Name ="+getName());  
+      System.out.println("Salary ="+getSalary());  
+      System.out.println("==========================");  
+        
+      Iterator<Employee> it = employees.iterator();  
+        
+          while(it.hasNext())  {  
+            Employee employee = it.next();  
+            employee.print();  
+         }  
+     }  
+}// End of the BankManager class.  
+```
+
+#### Create a Cashier class
+
+<br>
+
+* Create a Cashier class that will be treated as a leaf and it will implement to the Employee interface.
+
+**File: Cashier.java** 
+
+```java
+public  class Cashier implements Employee{  
+    /* 
+         In this class,there are many methods which are not applicable to cashier because 
+         it is a leaf node. 
+     */  
+        private int id;  
+            private String name;  
+        private double salary;  
+        public Cashier(int id,String name,double salary)  {  
+            this.id=id;  
+            this.name = name;  
+            this.salary = salary;  
+        }  
+        @Override  
+        public void add(Employee employee) {  
+            //this is leaf node so this method is not applicable to this class.  
+        }  
+        @Override  
+        public Employee getChild(int i) {  
+            //this is leaf node so this method is not applicable to this class.  
+            return null;  
+        }  
+        @Override  
+        public int getId() {  
+            // TODO Auto-generated method stub  
+            return id;  
+        }  
+        @Override  
+        public String getName() {  
+            return name;  
+        }  
+        @Override  
+        public double getSalary() {  
+            return salary;  
+        }  
+        @Override  
+        public void print() {  
+            System.out.println("==========================");  
+            System.out.println("Id ="+getId());  
+            System.out.println("Name ="+getName());  
+            System.out.println("Salary ="+getSalary());  
+            System.out.println("==========================");  
+        }  
+        @Override  
+        public void remove(Employee employee) {  
+            //this is leaf node so this method is not applicable to this class.  
+        }  
+}  
+```
+
+#### Create a Accountant class
+
+<br>
+
+Create a Accountant class that will also be treated as a leaf and it will implement to the Employee interface.
+
+**File: Accountant.java**
+
+```java
+public class Accountant implements Employee{  
+/* 
+    In this class,there are many methods which are not applicable to cashier because 
+    it is a leaf node. 
+*/  
+    private int id;  
+    private String name;  
+    private double salary;  
+   public Accountant(int id,String name,double salary)  {  
+       this.id=id;  
+       this.name = name;  
+       this.salary = salary;  
+   }  
+   @Override  
+   public void add(Employee employee) {  
+       //this is leaf node so this method is not applicable to this class.  
+   }  
+   @Override  
+   public Employee getChild(int i) {  
+       //this is leaf node so this method is not applicable to this class.  
+       return null;  
+   }  
+   @Override  
+    public int getId() {  
+        // TODO Auto-generated method stub  
+        return id;  
+   }  
+   @Override  
+   public String getName() {  
+       return name;  
+   }  
+   @Override  
+   public double getSalary() {  
+       return salary;  
+   }  
+   @Override  
+   public void print() {  
+       System.out.println("=========================");  
+       System.out.println("Id ="+getId());  
+       System.out.println("Name ="+getName());  
+       System.out.println("Salary ="+getSalary());  
+       System.out.println("=========================");  
+   }  
+  @Override  
+   public void remove(Employee employee) {  
+       //this is leaf node so this method is not applicable to this class.  
+   }  
+} 
+``` 
+
+#### Create a CompositePatternDemo class
+
+<br>
+
+* Create a CompositePatternDemo class that will also be treated as a Client and ii will use the Employee interface.
+
+**File: CompositePatternDemo.java**
+
+```java
+public class CompositePatternDemo {  
+    public static void main(String args[]){  
+         Employee emp1=new Cashier(101,"Sohan Kumar", 20000.0);  
+         Employee emp2=new Cashier(102,"Mohan Kumar", 25000.0);  
+         Employee emp3=new Accountant(103,"Seema Mahiwal", 30000.0);   
+         Employee manager1=new BankManager(100,"Ashwani Rajput",100000.0);  
+            
+          manager1.add(emp1);  
+          manager1.add(emp2);  
+          manager1.add(emp3);  
+          manager1.print();  
+        }  
+}  
+```
+
+#### Output
+
+<br>
+
+![output](images/dp21.png)
+
+
+
+## Decorator Pattern
+
+<br>
+
+* A Decorator Pattern says that just "attach a flexible additional responsibilities to an object dynamically".
+
+* In other words, The Decorator Pattern uses composition instead of inheritance to extend the functionality of an object at runtime.
+
+* The Decorator Pattern is also known as **Wrapper**.
+
+<br>
+
+<!-- style="font-size:20px;"-->
+Advantage of Decorator Pattern
+
+* It provides greater flexibility than static inheritance.
+* It enhances the extensibility of the object, because changes are made by coding new classes.
+* It simplifies the coding by allowing you to develop a series of functionality from targeted classes instead of coding all of the    behavior into the object.
+
+<br>
+
+<!-- style="font-size:20px;"-->
+Usage of Decorator Pattern
+
+**It is used:**
+
+* When you want to transparently and dynamically add responsibilities to objects without affecting other objects.
+* When you want to add responsibilities to an object that you may want to change in future.
+* Extending functionality by sub-classing is no longer practical.
+
+### UML for Decorator Pattern
+
+<br>
+
+![Uml](images/dp22.png)
+
+
+### Example of Decorator Pattern
+
+<br>
+
+<!-- style="font-size:20px;"-->
+1. [Create a Food interface](#create-a-food-interface)
+
+<!-- style="font-size:20px;"-->
+2. [Create a VegFood class](#create-a-vegfood-class)
+
+<!-- style="font-size:20px;"-->
+3. [Create a FoodDecorator abstract class](#create-a-fooddecorator-abstract-class)
+
+<!-- style="font-size:20px;"-->
+4. [Create a NonVegFood concrete class](#create-a-nonvegfood-concrete-class)
+
+<!-- style="font-size:20px;"-->
+5. [Create a ChineeseFood concrete class](#create-a-chineesefood-concrete-class)
+
+<!-- style="font-size:20px;"-->
+6. [Create a DecoratorPatternCustomer class](#create-a-decoratorpatterncustomer-class)
+
+
+#### Create a Food interface
+
+<br>
+
+**Step 1 :** Create a Food interface.
+
+```java
+public interface Food {  
+    public String prepareFood();  
+    public double foodPrice();  
+}// End of the Food interface.
+``` 
+
+#### Create a VegFood class
+
+<br>
+
+**Step 2 :** Create a VegFood class that will implements the Food interface and override its all methods.
+
+**File: VegFood.java**
+
+```java
+public class VegFood implements Food {  
+    public String prepareFood(){  
+         return "Veg Food";  
+    }  
+  
+        public double foodPrice(){  
+        return 50.0;  
+    }  
+}  
+```
+
+#### Create a FoodDecorator abstract class
+
+<br>
+
+**Step 3 :** Create a FoodDecorator abstract class that will implements the Food interface and override it's all methods and it has the ability to decorate some more foods.
+
+**File: FoodDecorator.java**
+
+```java
+public abstract class FoodDecorator implements Food{  
+    private Food newFood;  
+    public FoodDecorator(Food newFood)  {  
+        this.newFood=newFood;  
+    }  
+    @Override  
+    public String prepareFood(){  
+        return newFood.prepareFood();   
+    }  
+    public double foodPrice(){  
+        return newFood.foodPrice();  
+    }  
+}  
+
+```
+#### Create a NonVegFood concrete class
+
+**Step 4 :** Create a NonVegFood concrete class that will extend the FoodDecorator class and override it's all methods.
+
+**File: NonVegFood.java**
+
+```java
+public class NonVegFood extends FoodDecorator{    
+    public NonVegFood(Food newFood) {  
+        super(newFood);  
+    }  
+    public String prepareFood(){  
+        return super.prepareFood() +" With Roasted Chiken and Chiken Curry  ";   
+    }  
+    public double foodPrice()   {  
+        return super.foodPrice()+150.0;  
+    }  
+}  
+```
+
+#### Create a ChineeseFood concrete class
+
+<br>
+
+**Step 5 :** Create a ChineeseFood concrete class that will extend the FoodDecorator class and override it's all methods.
+
+**File: ChineeseFood.java**
+
+```java
+public class ChineeseFood extends FoodDecorator{  
+  public ChineeseFood(Food newFood)    {  
+        super(newFood);  
+  }  
+    public String prepareFood(){  
+        return super.prepareFood() +" With Fried Rice and Manchurian  ";   
+    }  
+    public double foodPrice()   {  
+        return super.foodPrice()+65.0;  
+        }  
+} 
+``` 
+
+#### Create a DecoratorPatternCustomer class 
+
+<br>
+
+**Step 6 :** Create a DecoratorPatternCustomer class that will use Food interface to use which type of food customer wants means (Decorates).
+
+**File: DecoratorPatternCustomer.java**
+
+```java
+import java.io.BufferedReader;  
+import java.io.IOException;  
+import java.io.InputStreamReader;  
+public class DecoratorPatternCustomer {  
+    private static int  choice;  
+    public static void main(String args[]) throws NumberFormatException, IOException    {  
+       do{        
+        System.out.print("========= Food Menu ============ \n");  
+        System.out.print("            1. Vegetarian Food.   \n");  
+        System.out.print("            2. Non-Vegetarian Food.\n");  
+        System.out.print("            3. Chineese Food.         \n");  
+        System.out.print("            4. Exit                        \n");  
+        System.out.print("Enter your choice: ");  
+        BufferedReader br=new BufferedReader(new InputStreamReader(System.in));   
+        choice=Integer.parseInt(br.readLine());  
+        switch (choice) {  
+        case 1:{   
+                 VegFood vf=new VegFood();  
+              System.out.println(vf.prepareFood());  
+              System.out.println( vf.foodPrice());  
+            }  
+            break;  
+              
+                case 2:{  
+                Food f1=new NonVegFood((Food) new VegFood());  
+                    System.out.println(f1.prepareFood());  
+                System.out.println( f1.foodPrice());  
+        }  
+            break;    
+     case 3:{  
+             Food f2=new ChineeseFood((Food) new VegFood());  
+                     System.out.println(f2.prepareFood());  
+                    System.out.println( f2.foodPrice());  
+              }  
+            break;    
+              
+         default:{    
+            System.out.println("Other than these no food available");  
+        }         
+    return;  
+     }//end of switch  
+          
+}while(choice!=4);  
+    }  
+}
+```  
+
+#### Output
+
+<br>
+
+![output](images/dp23.png)
+
+## Facade Pattern
+
+<br>
+
+* A Facade Pattern says that just "just provide a unified and simplified interface to a set of interfaces in a subsystem, therefore it hides the complexities of the subsystem from the client".
+
+* In other words, Facade Pattern describes a higher-level interface that makes the sub-system easier to use.
+
+* Practically, every Abstract Factory is a type of Facade.
+
+<br>
+
+<!-- style="font-size:20px;"-->
+Advantage of Facade Pattern
+
+* It shields the clients from the complexities of the sub-system components.
+* It promotes loose coupling between subsystems and its clients.
+
+<br>
+
+<!-- style="font-size:20px;"-->
+Usage of Facade Pattern:
+
+**It is used:**
+
+* When you want to provide simple interface to a complex sub-system.
+* When several dependencies exist between clients and the implementation classes of an abstraction.
+
+### UML for Facade Pattern
+
+<br>
+
+![Uml](images/dp24.png)
+
+
+### Example of Facade Pattern
+
+<br>
+
+<!-- style="font-size:20px;"-->
+1. [Create a MobileShop interface](#create-a-mobileshop-interface)
+
+<!-- style="font-size:20px;"-->
+2. [Create a Iphone implementation class](#create-a-iphone-implementation-class)
+
+<!-- style="font-size:20px;"-->
+3. [Create a Samsung implementation class](#create-a-samsung-implementation-class)
+
+<!-- style="font-size:20px;"-->
+4. [Create a Blackberry implementation class](#create-a-blackberry-implementation-class)
+
+<!-- style="font-size:20px;"-->
+5. [Create a ShopKeeper concrete class](#create-a-shopkeeper-concrete-class)
+
+<!-- style="font-size:20px;"-->
+6. [Create a client](#create-a-client)
+
+
+#### Create a MobileShop interface
+
+<br>
+
+* Create a MobileShop interface.
+
+**File: MobileShop.java**
+
+```java
+public interface MobileShop {  
+    public void modelNo();  
+    public void price();  
+}  
+```
+
+#### Create a Iphone implementation class
+
+<br>
+
+* Create a Iphone implementation class that will implement Mobileshop interface.
+
+**File: Iphone.java**
+
+```java
+public class Iphone implements MobileShop {  
+    @Override  
+    public void modelNo() {  
+        System.out.println(" Iphone 6 ");  
+    }  
+    @Override  
+    public void price() {  
+    System.out.println(" Rs 65000.00 ");  
+    }  
+} 
+``` 
+
+#### Create a Samsung implementation class
+
+<br>
+
+* Create a Samsung implementation class that will implement Mobileshop interface.
+
+**File: Samsung.java**
+
+```java
+public class Samsung implements MobileShop {  
+    @Override  
+    public void modelNo() {  
+    System.out.println(" Samsung galaxy tab 3 ");  
+    }  
+    @Override  
+    public void price() {  
+        System.out.println(" Rs 45000.00 ");  
+    }  
+} 
+``` 
+
+#### Create a Blackberry implementation class
+
+<br>
+
+* Create a Blackberry implementation class that will implement Mobileshop interface .
+
+**File: Blackberry.java**
+
+```java
+public class Blackberry implements MobileShop {  
+    @Override  
+    public void modelNo() {  
+    System.out.println(" Blackberry Z10 ");  
+    }  
+    @Override  
+    public void price() {  
+        System.out.println(" Rs 55000.00 ");  
+    }  
+} 
+``` 
+
+#### Create a ShopKeeper concrete class
+
+<br>
+
+* Create a ShopKeeper concrete class that will use MobileShop interface.
+
+**File: ShopKeeper.java**
+
+```java
+public class ShopKeeper {  
+    private MobileShop iphone;  
+    private MobileShop samsung;  
+    private MobileShop blackberry;  
+      
+    public ShopKeeper(){  
+        iphone= new Iphone();  
+        samsung=new Samsung();  
+        blackberry=new Blackberry();  
+    }  
+    public void iphoneSale(){  
+        iphone.modelNo();  
+        iphone.price();  
+    }  
+        public void samsungSale(){  
+        samsung.modelNo();  
+        samsung.price();  
+    }  
+   public void blackberrySale(){  
+    blackberry.modelNo();  
+    blackberry.price();  
+        }  
+}  
+```
+
+#### Create a client
+
+<br>
+
+* Create client that can purchase the mobiles from MobileShop through ShopKeeper.
+
+**File: FacadePatternClient.java**
+
+```java
+import java.io.BufferedReader;  
+import java.io.IOException;  
+import java.io.InputStreamReader;  
+  
+public class FacadePatternClient {  
+    private static int  choice;  
+    public static void main(String args[]) throws NumberFormatException, IOException{  
+        do{       
+            System.out.print("========= Mobile Shop ============ \n");  
+            System.out.print("            1. IPHONE.              \n");  
+            System.out.print("            2. SAMSUNG.              \n");  
+            System.out.print("            3. BLACKBERRY.            \n");  
+            System.out.print("            4. Exit.                     \n");  
+            System.out.print("Enter your choice: ");  
+              
+            BufferedReader br=new BufferedReader(new InputStreamReader(System.in));  
+            choice=Integer.parseInt(br.readLine());  
+            ShopKeeper sk=new ShopKeeper();  
+              
+            switch (choice) {  
+            case 1:  
+                {   
+                  sk.iphoneSale();  
+                    }  
+                break;  
+       case 2:  
+                {  
+                  sk.samsungSale();        
+                    }  
+                break;    
+       case 3:  
+                           {  
+                           sk.blackberrySale();       
+                           }  
+                   break;     
+            default:  
+            {    
+                System.out.println("Nothing You purchased");  
+            }         
+                return;  
+            }  
+              
+      }while(choice!=4);  
+   }  
+}  
+```
+
+#### Output
+
+<br>
+
+![output](images/dp25.png)
+
+
+## Flyweight Pattern
+
+<br>
+
+A Flyweight Pattern says that just "**to reuse already existing similar kind of objects by storing them and create new object when no matching object is found**".
+
+<br>
+
+<!-- style="font-size:20px;"-->
+Advantage of Flyweight Pattern
+
+* It reduces the number of objects.
+* It reduces the amount of memory and storage devices required if the objects are persisted
+
+<br>
+
+<!-- style="font-size:20px;"-->
+Usage of Flyweight Pattern
+
+* When an application uses number of objects
+* When the storage cost is high because of the quantity of objects.
+* When the application does not depend on object identity.
+
+## Proxy Pattern
+
+<br>
+
+* Proxy means an object representing another object.
+
+* According to GoF, a Proxy Pattern "provides the control for accessing the original object".
+
+* So, we can perform many operations like hiding the information of original object, on demand loading etc.
+
+* Proxy pattern is also known as **Surrogate** or **Placeholder**.
+
+<br>
+
+<!-- style="font-size:20px;"-->
+Advantage of Proxy Pattern
+
+* It provides the protection to the original object from the outside world.
+
+<br>
+
+<!-- style="font-size:20px;"-->
+Usage of Proxy Pattern:
+
+
+* **It can be used in Virtual Proxy scenario** - Consider a situation where there is multiple database call to extract huge size image. Since this is an expensive operation so here we can use the proxy pattern which would create multiple proxies and point to the huge size memory consuming object for further processing. The real object gets created only when a client first requests/accesses the object and after that we can just refer to the proxy to reuse the object. This avoids duplication of the object and hence saving memory.
+
+* **It can be used in Protective Proxy scenario** - It acts as an authorization layer to verify that whether the actual user has access the appropriate content or not. For example, a proxy server which provides restriction on internet access in office. Only the websites and contents which are valid will be allowed and the remaining ones will be blocked.
+
+* **It can be used in Remote Proxy scenario** - A remote proxy can be thought about the stub in the RPC call. The remote proxy provides a local representation of the object which is present in the different address location. Another example can be providing interface for remote resources such as web service or REST resources.
+
+* **It can be used in Smart Proxy scenario** - A smart proxy provides additional layer of security by interposing specific actions when the object is accessed. For example, to check whether the real object is locked or not before accessing it so that no other objects can change it.
+
+### UML for Proxy Pattern
+
+<br>
+
+![Uml](images/dp26.png)
+
+### Example of Proxy Pattern
+
+<br>
+
+<!-- style="font-size:20px;"-->
+1. [Create an OfficeInternetAccess interface](#create-an-officeinternetaccess-interface)
+
+<!-- style="font-size:20px;"-->
+2. [Create a RealInternetAccess class](#create-a-realinternetaccess-class)
+
+<!-- style="font-size:20px;"-->
+3. [Create a ProxyInternetAccess class](#create-a-proxyinternetaccess-class)
+
+<!-- style="font-size:20px;"-->
+4. [Create a ProxyPatternClient class](#create-a-proxypatternclient-class)
+
+
+
+#### Create an OfficeInternetAccess interface
+
+<br>
+
+```java
+public interface OfficeInternetAccess {  
+    public void grantInternetAccess();  
+}
+```
+
+#### Create a RealInternetAccess class
+
+<br>
+
+* Create a RealInternetAccess class that will implement OfficeInternetAccess interface for granting the permission to the specific employee.
+
+**File: RealInternetAccess.java**
+
+```java
+public class RealInternetAccess implements OfficeInternetAccess {  
+    private String employeeName;  
+    public RealInternetAccess(String empName) {  
+        this.employeeName = empName;  
+    }  
+    @Override  
+    public void grantInternetAccess() {  
+        System.out.println("Internet Access granted for employee: "+ employeeName);  
+    }  
+}
+```  
+
+#### Create a ProxyInternetAccess class
+
+<br>
+
+* Create a ProxyInternetAccess class that will implement OfficeInternetAccess interface for providing the object of RealInternetAccess class.
+
+**File: ProxyInternetAccess.java**
+
+```java
+public class ProxyInternetAccess implements OfficeInternetAccess {  
+           private String employeeName;  
+           private RealInternetAccess  realaccess;  
+               public ProxyInternetAccess(String employeeName) {  
+            this.employeeName = employeeName;  
+        }  
+        @Override  
+        public void grantInternetAccess()   
+        {  
+            if (getRole(employeeName) > 4)   
+            {  
+                realaccess = new RealInternetAccess(employeeName);  
+                realaccess.grantInternetAccess();  
+            }   
+            else   
+            {  
+                System.out.println("No Internet access granted. Your job level is below 5");  
+            }  
+        }  
+        public int getRole(String emplName) {  
+            // Check role from the database based on Name and designation  
+            // return job level or job designation.  
+            return 9;  
+        }  
+} 
+``` 
+
+#### Create a ProxyPatternClient class
+
+<br>
+
+* Create a ProxyPatternClient class that can access the internet actually.
+
+**File: ProxyPatternClient.java**
+
+```java
+public class ProxyPatternClient {  
+    public static void main(String[] args)   
+    {  
+        OfficeInternetAccess access = new ProxyInternetAccess("Ashwani Rajput");  
+        access.grantInternetAccess();  
+    }  
+} 
+``` 
+
+#### Output
+
+<br>
+
+![output](images/dp27.png)
+
+
+# Behavioral Design Patterns
+
+<br>
+
+* Behavioral design patterns are concerned with the interaction and responsibility of objects.
+
+* In these design patterns, the interaction between the objects should be in such a way that they can easily talk to each other and still should be loosely coupled.
+
+* That means the implementation and the client should be loosely coupled in order to avoid hard coding and dependencies.
+
+<br>
+
+<!-- style="font-size:20px;"-->
+**There are 12 types of behavioral design patterns:**
+
+<!-- style="font-size:20px;"-->
+1. [Chain of Responsibility Pattern](#chain-of-responsibility-pattern)
+
+<!-- style="font-size:20px;"-->
+2. [Command Pattern](#command-pattern)
+
+<!-- style="font-size:20px;"-->
+3. [Interpreter Pattern](#interpreter-pattern)
+
+<!-- style="font-size:20px;"-->
+4. [Iterator Pattern](#iterator-pattern)
+
+<!-- style="font-size:20px;"-->
+5. [Mediator Pattern](#mediator-pattern)
+
+<!-- style="font-size:20px;"-->
+6. [Memento Pattern](#memento-pattern)
+
+<!-- style="font-size:20px;"-->
+7. [Observer Pattern](#observer-pattern)
+
+<!-- style="font-size:20px;"-->
+8. [State Pattern](#state-pattern)
+
+<!-- style="font-size:20px;"-->
+9. [Strategy Pattern](#strategy-pattern)
+
+<!-- style="font-size:20px;"-->
+10. [Template Pattern](#template-pattern)
+
+<!-- style="font-size:20px;"-->
+11. [Visitor Pattern](#visitor-pattern)
+
+<!-- style="font-size:20px;"-->
+12. [Null Object](#null-object)
+
+
+## Chain of Responsibility Pattern
+
+<br>
+
+* In chain of responsibility, sender sends a request to a chain of objects. The request can be handled by any object in the chain.
+
+* A Chain of Responsibility Pattern says that just "avoid coupling the sender of a request to its receiver by giving multiple objects a chance to handle the request". For example, an ATM uses the Chain of Responsibility design pattern in money giving process.
+
+* In other words, we can say that normally each receiver contains reference of another receiver. If one object cannot handle the request then it passes the same to the next receiver and so on.
+
+<br>
+
+<!-- style="font-size:20px;"-->
+Advantage of Chain of Responsibility Pattern
+
+* It reduces the coupling.
+* It adds flexibility while assigning the responsibilities to objects.
+* It allows a set of classes to act as one; events produced in one class can be sent to other handler classes with the help of composition.
+
+<br>
+
+<!-- style="font-size:20px;"-->
+Usage of Chain of Responsibility Pattern:
+
+**It is used:**
+
+* When more than one object can handle a request and the handler is unknown.
+* When the group of objects that can handle the request must be specified in dynamic way.
+
+### UML for Chain of Responsibility Pattern
+
+<br>
+
+![Uml](images/dp28.png)
+
+
+### Example of Chain of Responsibility Pattern
+
+<br>
+
+<!-- style="font-size:20px;"-->
+1. [Create a Logger abstract class](#create-a-logger-abstract-class)
+
+<!-- style="font-size:20px;"-->
+2. [Create a ConsoleBasedLogger class](#create-a-consolebasedlogger-class)
+
+<!-- style="font-size:20px;"-->
+3. [Create a DebugBasedLogger class](#create-a-debugbasedlogger-class)
+
+<!-- style="font-size:20px;"-->
+4. [Create a ErrorBasedLogger class](#create-a-errorbasedlogger-class)
+
+<!-- style="font-size:20px;"-->
+5. [Create a ChainOfResponsibilityClient class](#create-a-chainofresponsibilityclient-class)
+
+
+#### Create a Logger abstract class
+
+<br>
+
+```java
+public abstract class Logger {  
+    public static int OUTPUTINFO=1;  
+    public static int ERRORINFO=2;  
+    public static int DEBUGINFO=3;  
+    protected int levels;  
+    protected Logger nextLevelLogger;  
+    public void setNextLevelLogger(Logger nextLevelLogger) {  
+        this.nextLevelLogger = nextLevelLogger;  
+    }  
+        public void logMessage(int levels, String msg){  
+        if(this.levels<=levels){  
+            displayLogInfo(msg);  
+        }  
+        if (nextLevelLogger!=null) {  
+            nextLevelLogger.logMessage(levels, msg);  
+        }  
+    }  
+    protected abstract void displayLogInfo(String msg);  
+}  
+```
+
+#### Create a ConsoleBasedLogger class
+
+<br>
+
+**File: ConsoleBasedLogger.java**
+
+```java
+public class ConsoleBasedLogger extends Logger {  
+    public ConsoleBasedLogger(int levels) {  
+        this.levels=levels;  
+    }  
+    @Override  
+    protected void displayLogInfo(String msg) {  
+        System.out.println("CONSOLE LOGGER INFO: "+msg);  
+    }  
+} 
+```
+
+#### Create a DebugBasedLogger class
+
+<br>
+
+**File: DebugBasedLogger.java**
+
+```java
+public class DebugBasedLogger extends Logger {  
+    public DebugBasedLogger(int levels) {  
+        this.levels=levels;  
+    }  
+    @Override  
+    protected void displayLogInfo(String msg) {  
+        System.out.println("DEBUG LOGGER INFO: "+msg);  
+    }  
+}// End of the DebugBasedLogger class
+```  
+
+#### Create a ErrorBasedLogger class
+
+<br>
+
+**File: ErrorBasedLogger.java**
+
+```java
+public class ErrorBasedLogger extends Logger {  
+    public ErrorBasedLogger(int levels) {  
+        this.levels=levels;  
+    }  
+    @Override  
+    protected void displayLogInfo(String msg) {  
+        System.out.println("ERROR LOGGER INFO: "+msg);  
+    }  
+}// End of the ErrorBasedLogger class.
+```  
+
+#### Create a ChainOfResponsibilityClient class
+
+<br>
+
+**File: ChainofResponsibilityClient.java**
+
+```java
+public class ChainofResponsibilityClient {  
+    private static Logger doChaining(){  
+          Logger consoleLogger = new ConsoleBasedLogger(Logger.OUTPUTINFO);  
+            
+          Logger errorLogger = new ErrorBasedLogger(Logger.ERRORINFO);  
+          consoleLogger.setNextLevelLogger(errorLogger);  
+            
+          Logger debugLogger = new DebugBasedLogger(Logger.DEBUGINFO);  
+          errorLogger.setNextLevelLogger(debugLogger);  
+            
+          return consoleLogger;   
+          }  
+          public static void main(String args[]){  
+          Logger chainLogger= doChaining();  
+  
+              chainLogger.logMessage(Logger.OUTPUTINFO, "Enter the sequence of values ");  
+              chainLogger.logMessage(Logger.ERRORINFO, "An error is occured now");  
+              chainLogger.logMessage(Logger.DEBUGINFO, "This was the error now debugging is compiled");  
+              }  
+}  
+```
+
+#### Output
+
+<br>
+
+![output](images/dp29.png)
+
+
+
+## Command Pattern
+
+<br>
+
+* A Command Pattern says that "encapsulate a request under an object as a command and pass it to invoker object. Invoker object looks for the appropriate object which can handle this command and pass the command to the corresponding object and that object executes the command".
+
+* It is also known as Action or Transaction.
+
+<br>
+
+<!-- style="font-size:20px;"-->
+Advantage of command pattern
+
+* It separates the object that invokes the operation from the object that actually performs the operation.
+* It makes easy to add new commands, because existing classes remain unchanged.
+
+<br>
+
+<!-- style="font-size:20px;"-->
+Usage of command pattern:
+
+**It is used:**
+
+* When you need parameterize objects according to an action perform.
+* When you need to create and execute requests at different times.
+* When you need to support rollback, logging or transaction functionality.
+
+### UML for command pattern
+
+<br>
+
+* **Command** This is an interface for executing an operation.
+* ConcreteCommand This class extends the Command interface and implements the execute method. This class creates a binding between the action and the receiver.
+* **Client** This class creates the ConcreteCommand class and associates it with the receiver.
+* **Invoker** This class asks the command to carry out the request.
+* **Receiver** This class knows to perform the operation.
+
+<br>
+
+![Uml](images/dp30.png)
+
+
+### Example of command pattern
+
+<br>
+
+<!-- style="font-size:20px;"-->
+1. [Create a ActionListernerCommand](#create-a-actionlisternercommand)
+
+<!-- style="font-size:20px;"-->
+2. [Create a Document class](#create-a-document-class)
+
+<!-- style="font-size:20px;"-->
+3. [Create a ActionOpen class](#create-a-actionopen-class)
+
+<!-- style="font-size:20px;"-->
+4. [Create a ActionSave class](#create-a-actionsave-class)
+
+<!-- style="font-size:20px;"-->
+5. [Create a MenuOptions class](#create-a-menuoptions-class)
+
+<!-- style="font-size:20px;"-->
+6. [Create a CommanPatternClient class](#create-a-commanpatternclient-class)
+
+
+#### Create a ActionListernerCommand
+
+<br>
+
+* Create a ActionListernerCommand interface that will act as a Command.
+
+```java
+public interface ActionListenerCommand {  
+    public void execute();  
+}
+```  
+
+#### Create a Document class
+
+<br>
+
+* Create a Document class that will act as a Receiver.
+
+**File: Document.java**
+
+```java
+public class Document {  
+          public void open(){  
+           System.out.println("Document Opened");  
+       }  
+       public void save(){  
+           System.out.println("Document Saved");  
+       }  
+} 
+``` 
+
+#### Create a ActionOpen class
+
+<br>
+
+* Create a ActionOpen class that will act as an ConcreteCommand.
+
+**File: ActionOpen.java**
+
+```java
+public class ActionOpen implements ActionListenerCommand{  
+    private Document doc;  
+    public ActionOpen(Document doc) {  
+        this.doc = doc;  
+    }  
+    @Override  
+    public void execute() {  
+        doc.open();  
+    }  
+}  
+```
+
+#### Create a ActionSave class
+
+<br>
+
+* Create a ActionSave class that will act as an ConcreteCommand.
+
+**File: AdapterPatternDemo.java**
+
+```java
+public class ActionSave implements ActionListenerCommand{  
+   private Document doc;  
+   public ActionSave(Document doc) {  
+        this.doc = doc;  
+    }  
+    @Override  
+    public void execute() {  
+        doc.save();  
+    }  
+}  
+```
+
+#### Create a MenuOptions class
+
+<br>
+
+* Create a MenuOptions class that will act as an Invoker.
+
+**File: ActionSave.java**
+
+```java
+public class ActionSave implements ActionListenerCommand{  
+   private Document doc;  
+    public ActionSave(Document doc) {  
+        this.doc = doc;  
+    }  
+    @Override  
+    public void execute() {  
+        doc.save();  
+    }  
+}  
+```
+
+#### Create a CommanPatternClient class
+
+<br>
+
+* Create a CommanPatternClient class that will act as a Client.
+
+```java
+**File: AdapterPatternDemo.java**
+
+public class CommandPatternClient {  
+    public static void main(String[] args) {  
+        Document doc = new Document();  
+          
+        ActionListenerCommand clickOpen = new ActionOpen(doc);  
+        ActionListenerCommand clickSave = new ActionSave(doc);  
+          
+        MenuOptions menu = new MenuOptions(clickOpen, clickSave);  
+          
+        menu.clickOpen();  
+        menu.clickSave();  
+   }  
+} 
+``` 
+
+#### Output 
+
+<br>
+
+![Output](images/dp31.png)
+
+
+
+
+## Interpreter Pattern
+
+<br>
+
+* An Interpreter Pattern says that "to define a representation of grammar of a given language, along with an interpreter that uses this representation to interpret sentences in the language".
+
+* Basically the Interpreter pattern has limited area where it can be applied. 
+
+* This pattern can applied for parsing the expressions defined in simple grammars and sometimes in simple rule engines.
+
+<br>
+
+<!-- style="font-size:20px;"-->
+Advantage of Interpreter Pattern
+
+* It is easier to change and extend the grammar.
+* Implementing the grammar is straightforward.
+
+<br>
+
+<!-- style="font-size:20px;"-->
+ Usage of Interpreter pattern:
+
+ 
+**It is used:**
+
+* When the grammar of the language is not complicated.
+* When the efficiency is not a priority.
+
+
+### UML for Interpreter Pattern
+
+<br>
+
+![Uml](images/dp32.png)
+
+
+### Example of Interpreter Pattern
+
+<br>
+
+<!-- style="font-size:20px;"-->
+1. [Create a Pattern interface](#create-a-pattern-interface)
+
+<!-- style="font-size:20px;"-->
+2. [Create a InfixToPostfixPattern class](#create-a-infixtopostfixpattern-class)
+
+<!-- style="font-size:20px;"-->
+3. [Create a InterpreterPatternClient class](#create-a-interpreterpatternclient-class)
+
+
+#### Create a Pattern interface
+
+<br>
+
+```java
+public interface Pattern {  
+    public String conversion(String exp);  
+} 
+``` 
+
+#### Create a InfixToPostfixPattern class
+
+<br>
+
+* Create a InfixToPostfixPattern class that will allow what kind of pattern you want to convert.
+
+**File: InfixToPostfixPattern.java**
+
+```java
+import java.util.Stack;  
+public class InfixToPostfixPattern implements Pattern{  
+    @Override  
+    public String conversion(String exp) {  
+        int priority = 0;// for the priority of operators.  
+       String postfix = "";  
+        Stack<Character> s1 = new Stack<Character>();  
+       for (int i = 0; i < exp.length(); i++)  
+        {  
+           char ch = exp.charAt(i);  
+           if (ch == '+' || ch == '-' || ch == '*' || ch == '/'||ch=='%')  
+           {  
+              // check the precedence  
+              if (s1.size() <= 0)  
+                 s1.push(ch);  
+           }  
+           else  
+              {  
+                 Character chTop = (Character) s1.peek();  
+                 if (chTop == '*' || chTop == '/')  
+                    priority = 1;  
+                 else  
+                    priority = 0;  
+                 if (priority == 1)  
+                 {  
+                    if (ch == '*' || ch == '/'||ch=='%')  
+                    {  
+                       postfix += s1.pop();  
+                                                  i--;  
+                    }  
+                    else  
+                    { // Same  
+                       postfix += s1.pop();  
+                       i--;  
+                    }  
+                 }  
+                 else  
+                 {  
+                    if (ch == '+' || ch == '-')  
+                    {  
+                       postfix += s1.pop();  
+                       s1.push(ch);  
+                    }  
+                    else  
+                       s1.push(ch);  
+                 }  
+              }  
+           }  
+           else  
+           {               
+              postfix += ch;  
+           }  
+        }  
+        int len = s1.size();  
+        for (int j = 0; j < len; j++)  
+           postfix += s1.pop();  
+        return postfix;  
+          
+    }   
+}// End of the InfixToPostfixPattern class. 
+``` 
+
+#### Create a InterpreterPatternClient class
+
+<br>
+
+* Create a InterpreterPatternClient class that will use InfixToPostfix Conversion.
+
+**File: InterpreterPatternClient.java**
+
+```java
+public class InterpreterPatternClient {  
+     public static void main(String[] args)  
+        {  
+            String infix = "a+b*c";  
+              
+            InfixToPostfixPattern ip=new InfixToPostfixPattern();  
+              
+            String postfix = ip.conversion(infix);  
+            System.out.println("Infix:   " + infix);  
+            System.out.println("Postfix: " + postfix);  
+       }  
+}  
+```
+
+#### Output
+
+<br>
+
+![output](images/dp33.png)
+
+
+## Iterator Pattern
+
+## Mediator Pattern
+
+## Memento Pattern
+
+## Observer Pattern
+
+## State Pattern
+
+## Strategy Pattern
+
+## Template Pattern
+
+## Visitor Pattern
+
+## Null Object
 
 
