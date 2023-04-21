@@ -90,7 +90,6 @@ Basically, design patterns are categorized into two parts:
 * State Pattern
 * Strategy Pattern
 * Template Pattern
-* Visitor Pattern
 
 
 # Creational Design Pattern
@@ -162,8 +161,14 @@ StudentRecord s1=new StudentRecord();
 
 <br>
 
-<!-- style="font-size:20px"-->
-**Step 1 :** Create a Plan abstract class.
+<!-- style="font-size:20px;"--> 
+* [Create a Plan abstract class](#create-a-plan-abstract-class)
+* [Create the concrete classes](#create-the-concrete-classes-that-extends-plan-abstract-class)
+* [Create a GetPlanFactory ](#create-a-getplanfactory-to-generate-object-of-concrete-classes)
+* [Generate Bill by using the GetPlanFactory ](#generate-bill-by-using-the-getplanfactory)
+
+
+#### Create a Plan abstract class
 
 <br>
 
@@ -179,10 +184,9 @@ abstract class Plan{
 } //end of Plan class. 
 ```
 
-<br>
 
-<!-- style="font-size:20px"-->
-**Step 2 :** Create the concrete classes that extends Plan abstract class.
+
+#### Create the concrete classes that extends Plan abstract class
 
 <br>
 
@@ -211,10 +215,9 @@ class  InstitutionalPlan extends Plan{
    }   //end of InstitutionalPlan class. 
 ```
 
-<br>
 
-<!-- style="font-size:20px"-->
-**Step 3 :** Create a GetPlanFactory to generate object of concrete classes based on given information..
+
+#### Create a GetPlanFactory to generate object of concrete classes
 
 <br>
 
@@ -243,10 +246,11 @@ class GetPlanFactory{
 
 <br>
 
-<!-- style="font-size:20px"-->
-**Step 4 :** Generate Bill by using the GetPlanFactory to get the object of concrete classes by passing an information such as type of plan DOMESTICPLAN or COMMERCIALPLAN or INSTITUTIONALPLAN.
+#### Generate Bill by using the GetPlanFactory 
 
 <br>
+
+* Generate Bill by using the GetPlanFactory to get the object of concrete classes by passing an information such as type of plan DOMESTICPLAN or COMMERCIALPLAN or INSTITUTIONALPLAN.
 
 ```java
 import java.io.*;    
@@ -272,7 +276,7 @@ class GenerateBill{
 ```  
 
 <!-- style="font-size:20px;color:red"-->
-**OUTPUT :**
+#### OUTPUT 
 
 ![output](images/dp3.png)
 
@@ -324,12 +328,22 @@ class GenerateBill{
 
 <br>
 
-Here, we are calculating the loan payment for different banks like **HDFC, ICICI, SBI** etc.
+* Here, we are calculating the loan payment for different banks like **HDFC, ICICI, SBI** etc.
 
 <br>
 
-<!-- style="font-size:20px"-->
-**Step 1 :** Create a Bank interface
+<!-- style="font-size:20px;"--> 
+1. [Create a Bank interface](#create-a-bank-interface)
+2. [Create concrete classes](#create-concrete-classes)
+3. [Create the Loan abstract class](#create-the-loan-abstract-class)
+4. [Create concrete classes that extend the Loan abstract class](#create-concrete-classes-that-extend-the-loan-abstract-class)
+5. [Create an abstract class](#create-an-abstract-class)
+6. [Create the factory classes that inherit AbstractFactory class](#create-the-factory-classes-that-inherit-abstractfactory-class)
+7. [Create a FactoryCreator class](#create-a-factorycreator-class)
+8. [Use the FactoryCreator to get AbstractFactory](#use-the-factorycreator-to-get-abstractfactory)
+
+
+#### Create a Bank interface
 
 <br>
 
@@ -340,10 +354,9 @@ interface Bank{
 }  
 ```
 
-<br>
 
-<!-- style="font-size:20px"-->
-**Step 2 :** Create concrete classes that implement the Bank interface.
+
+#### Create concrete classes
 
 <br>
 
@@ -383,10 +396,9 @@ class SBI implements Bank{
 }
 ```  
 
-<br>
 
-<!-- style="font-size:20px"-->
-**Step 3 :** Create the Loan abstract class.
+
+#### Create the Loan abstract class
 
 <br>
 
@@ -419,10 +431,8 @@ System.out.println("your monthly EMI is "+ EMI +" for the amount"+loanamount+"
 }// end of the Loan abstract class. 
 ``` 
 
-<br>
 
-<!-- style="font-size:20px"-->
-**Step 4 :** Create concrete classes that extend the Loan abstract class..
+#### Create concrete classes that extend the Loan abstract class
 
 <br>
 
@@ -451,12 +461,13 @@ class EducationLoan extends Loan{
 }//End of the EducationLoan class. 
 ```
 
+
+
+#### Create an abstract class
+
 <br>
 
-<!-- style="font-size:20px"-->
-**Step 5 :** Create an abstract class (i.e AbstractFactory) to get the factories for Bank and Loan Objects.
-
-<br>
+* Create an abstract class (i.e AbstractFactory) to get the factories for Bank and Loan Objects.
 
 ```java
 abstract class AbstractFactory{  
@@ -465,12 +476,12 @@ abstract class AbstractFactory{
 }
 ```  
 
-<br>
 
-<!-- style="font-size:20px"-->
-**Step 6 :** Create the factory classes that inherit AbstractFactory class to generate the object of concrete class based on given information.
+#### Create the factory classes that inherit AbstractFactory class 
 
 <br>
+
+* Create the factory classes that inherit AbstractFactory class to generate the object of concrete class based on given information.
 
 ```java
 class BankFactory extends AbstractFactory{  
@@ -517,8 +528,11 @@ class LoanFactory extends AbstractFactory{
 }  
 ```
 
-<!-- style="font-size:20px"-->
-**Step 7 :** Create a FactoryCreator class to get the factories by passing an information such as Bank or Loan.
+#### Create a FactoryCreator class
+
+<br>
+
+* Create a FactoryCreator class to get the factories by passing an information such as Bank or Loan.
 
 ```java
 class FactoryCreator {  
@@ -533,12 +547,13 @@ class FactoryCreator {
 }//End of the FactoryCreator. 
 ``` 
 
+
+
+#### Use the FactoryCreator to get AbstractFactory
+
 <br>
 
-<!-- style="font-size:20px"-->
-**Step 8 :** Use the FactoryCreator to get AbstractFactory in order to get factories of concrete classes by passing an information such as type.
-
-<br>
+* Use the FactoryCreator to get AbstractFactory*  in order to get factories of concrete classes by passing an information such as type.
 
 ```java
 import java.io.*;  
@@ -584,7 +599,9 @@ AbstractFactory loanFactory = FactoryCreator.getFactory("Loan");
 <br>
 
 <!-- style="font-size:20px;color:red"-->
-**OUTPUT :**
+#### OUTPUT
+
+<br>
 
 ![output](images/dp5.png)
 
@@ -2812,11 +2829,6 @@ public class ProxyPatternClient {
 <!-- style="font-size:20px;"-->
 10. [Template Pattern](#template-pattern)
 
-<!-- style="font-size:20px;"-->
-11. [Visitor Pattern](#visitor-pattern)
-
-<!-- style="font-size:20px;"-->
-12. [Null Object](#null-object)
 
 
 ## Chain of Responsibility Pattern
@@ -3348,20 +3360,1288 @@ public class InterpreterPatternClient {
 
 ## Iterator Pattern
 
+<br>
+
+* Iterator Pattern is used "**to access the elements of an aggregate object sequentially without exposing its underlying implementation**".
+
+* The Iterator pattern is also known as **Cursor**.
+
+In collection framework, we are now using Iterator that is preferred over Enumeration.
+
+```
+java.util.Iterator interface uses Iterator Design Pattern
+```
+<br>
+
+<!-- style="font-size:20px;"-->
+Advantage of Iterator Pattern
+
+* It supports variations in the traversal of a collection.
+* It simplifies the interface to the collection.
+
+<br>
+
+<!-- style="font-size:20px;"-->
+Usage of Iterator Pattern:
+
+**It is used:**
+
+* When you want to access a collection of objects without exposing its internal representation.
+* When there are multiple traversals of objects need to be supported in the collection.
+
+
+### UML for Iterator Pattern
+
+<br>
+
+![Uml](images/dp34.png)
+
+
+### Example of Iterator Pattern
+
+<br>
+
+<!-- style="font-size:20px;"-->
+1. [Create a Iterartor interface](#create-a-iterartor-interface)
+
+<!-- style="font-size:20px;"-->
+2. [Create a Container interface](#create-a-container-interface)
+
+<!-- style="font-size:20px;"-->
+3. [Create a CollectionofNames class](#create-a-collectionofnames-class)
+
+<!-- style="font-size:20px;"-->
+4. [Create a IteratorPatternDemo class](#create-a-iteratorpatterndemo-class)
+
+
+#### Create a Iterartor interface
+
+<br>
+
+```java
+public interface Iterator {  
+    public boolean hasNext();  
+    public Object next();  
+} 
+``` 
+
+#### Create a Container interface
+
+<br>
+
+```java
+public interface Container {  
+    public Iterator getIterator();  
+}// End of the Iterator interface.
+```  
+
+#### Create a CollectionofNames class
+
+<br>
+
+* Create a CollectionofNames class that will implement Container interface.
+
+**File: CollectionofNames.java**
+
+```java
+public class CollectionofNames implements Container {  
+public String name[]={"Ashwani Rajput", "Soono Jaiswal","Rishi Kumar","Rahul Mehta","Hemant Mishra"};   
+      
+@Override  
+    public Iterator getIterator() {  
+        return new CollectionofNamesIterate() ;  
+    }  
+    private class CollectionofNamesIterate implements Iterator{  
+        int i;  
+        @Override  
+        public boolean hasNext() {  
+            if (i<name.length){  
+                return true;  
+            }  
+            return false;  
+        }  
+        @Override  
+        public Object next() {  
+            if(this.hasNext()){  
+                return name[i++];  
+            }  
+            return null;      
+        }  
+    }  
+}  
+}
+```  
+
+#### Create a IteratorPatternDemo class
+
+<br>
+
+* Create a IteratorPatternDemo class.
+
+**File: IteratorPatternDemo.java**
+
+```java
+public class IteratorPatternDemo {  
+    public static void main(String[] args) {  
+          CollectionofNames cmpnyRepository = new CollectionofNames();  
+            
+          for(Iterator iter = cmpnyRepository.getIterator(); iter.hasNext();){  
+              String name = (String)iter.next();  
+              System.out.println("Name : " + name);  
+           }      
+    }  
+}
+```  
+
+#### Output
+
+<br>
+
+![output](images/dp35.png)
+
+
 ## Mediator Pattern
+
+<br>
+
+* A Mediator Pattern says that "to define an object that encapsulates how a set of objects interact".
+
+* The logic becomes more complex when functionality increases. Then what happens? We add more classes and they still interact with each other but it gets really difficult to maintain this code now. So, Mediator pattern takes care of this problem.
+
+* pattern is used to reduce communication complexity between multiple objects or classes. This pattern provides a mediator class which normally handles all the communications between different classes and supports easy maintainability of the code by loose coupling.
+
+<!-- style="font-size:20px;"-->
+Advantages:
+
+* It decouples the number of classes.
+* It simplifies object protocols.
+* It centralizes the control.
+* The individual components become simpler and much easier to deal with because they don't need to pass messages to one another.
+* The components don't need to contain logic to deal with their intercommunication and therefore, they are more generic.
+
+<!-- style="font-size:20px;"-->
+Usage:
+
+* It is commonly used in message-based systems likewise chat applications.
+* When the set of objects communicate in complex but in well-defined ways.
+
+### UML for Mediator Pattern
+
+<br>
+
+![Uml](images/dp36.png)
+
+<br>
+
+**ApnaChatroom :** defines the interface for interacting with participants.
+
+**ApnaChatroomImpl :** implements the operations defined by the Chatroom interface. The operations are managing the interactions between the objects: when one participant sends a message, the message is sent to the other participants.
+
+**Participant :** defines an interface for the users involved in chatting.
+
+**User1, User2, ...UserN :** implements Participant interface; the participant can be a number of users involved in chatting. But each Participant will keep only a reference to the ApnaChatRoom.
+
+### Example of Mediator Pattern
+
+<br>
+
+<!-- style="font-size:20px;"-->
+1. [Create a ApnaChatRoom interface](#create-a-apnachatroom-interface)
+
+<!-- style="font-size:20px;"-->
+2. [Create a ApnaChatRoomIml class](#create-a-apnachatroomiml-class)
+
+<!-- style="font-size:20px;"-->
+3. [Create a Participant abstract class](#create-a-participant-abstract-class)
+
+<!-- style="font-size:20px;"-->
+4. [Create a User1 class](#create-a-user1-class)
+
+<!-- style="font-size:20px;"-->
+5. [Create a User2 class](#create-a-user2-class)
+
+<!-- style="font-size:20px;"-->
+6. [Create a MediatorPatternDemo class](#create-a-mediatorpatterndemo-class)
+
+
+#### Create a ApnaChatRoom interface
+
+<br>
+
+
+```java
+//This is an interface.  
+public interface ApnaChatRoom {  
+      
+    public void showMsg(String msg, Participant p);  
+  
+}// End of the ApnaChatRoom interface.
+```  
+
+#### Create a ApnaChatRoomIml class
+
+<br>
+
+
+* Create a ApnaChatRoomIml class that will implement ApnaChatRoom interface and will also use the number of participants involved in chatting through Participant interface.
+
+
+```java
+//This is a class.  
+import java.text.DateFormat;  
+import java.text.SimpleDateFormat;  
+import java.util.Date;  
+  
+public class ApnaChatRoomImpl implements ApnaChatRoom{  
+    //get current date time   
+    DateFormat dateFormat = new SimpleDateFormat("E dd-MM-yyyy hh:mm a");  
+    Date date = new Date();  
+    @Override  
+    public void showMsg(String msg, Participant p) {  
+          
+        System.out.println(p.getName()+"'gets message: "+msg);  
+        System.out.println("\t\t\t\t"+"["+dateFormat.format(date).toString()+"]");    
+    }     
+}// End of the ApnaChatRoomImpl class.
+```  
+
+#### Create a Participant abstract class
+
+<br>
+
+```java
+//This is an abstract class.  
+public abstract class Participant {  
+      public abstract void sendMsg(String msg);  
+      public abstract void setname(String name);  
+      public abstract String getName();  
+}// End of the Participant abstract class. 
+``` 
+
+#### Create a User1 class
+
+<br>
+
+* Create a User1 class that will extend Participant abstract class and will use the ApnaChatRoom interface.
+
+```java
+//This is a class.  
+  
+public class User1 extends Participant {  
+      
+    private String name;  
+    private ApnaChatRoom chat;  
+      
+    @Override  
+    public void sendMsg(String msg) {  
+    chat.showMsg(msg,this);  
+          
+    }  
+  
+    @Override  
+    public void setname(String name) {  
+        this.name=name;  
+    }  
+  
+    @Override  
+    public String getName() {  
+        return name;  
+    }  
+      
+    public User1(ApnaChatRoom chat){  
+        this.chat=chat;  
+    }     
+      
+}// End of the User1 class.  
+```
+
+#### Create a User2 class
+
+<br>
+
+* Create a User2 class that will extend Participant abstract class and will use the ApnaChatRoom interface.
+
+//This is a class.  
+  
+```java
+public class User2 extends Participant {  
+  
+    private String name;  
+    private ApnaChatRoom chat;  
+      
+    @Override  
+    public void sendMsg(String msg) {  
+    this.chat.showMsg(msg,this);  
+          
+    }  
+  
+    @Override  
+    public void setname(String name) {  
+        this.name=name;  
+    }  
+  
+    @Override  
+    public String getName() {  
+        return name;  
+    }  
+      
+    public User2(ApnaChatRoom chat){  
+        this.chat=chat;  
+    }  
+  
+      
+      
+}  
+// End of the User2 class. 
+``` 
+
+#### Create a MediatorPatternDemo class
+
+<br>
+
+* Create a MediatorPatternDemo class that will use participants involved in chatting.
+
+```java
+//This is a class.  
+  
+public class MediatorPatternDemo {  
+      
+    public static void main(String args[])  
+    {  
+          
+          ApnaChatRoom chat = new ApnaChatRoomImpl();  
+      
+          User1 u1=new User1(chat);  
+          u1.setname("Ashwani Rajput");  
+          u1.sendMsg("Hi Ashwani! how are you?");  
+        
+                
+          User2 u2=new User2(chat);  
+          u2.setname("Soono Jaiswal");  
+          u2.sendMsg("I am Fine ! You tell?");  
+    }  
+  
+}// End of the MediatorPatternDemo class.
+```  
+
+#### Output
+
+<br>
+
+![output](images/dp37.png)
 
 ## Memento Pattern
 
+<br>
+
+* A Memento Pattern says that "to restore the state of an object to its previous state". But it must do this without violating Encapsulation. Such case is useful in case of error or failure.
+
+* The Memento pattern is also known as Token.
+
+* Memento design pattern is used to implement the undo operation. This is done by saving the current state of the object as it changes state.
+
+<br>
+
+<!-- style="font-size:20px;"-->
+**Advantages**
+* It preserves encapsulation boundaries.
+* It simplifies the originator.
+
+<!-- style="font-size:20px;"-->
+Usage
+
+* It is used in Undo and Redo operations in most software.
+* It is also used in database transactions.
+
+### UML for Memento Pattern
+
+<br>
+
+![Uml](images/dp38.png)
+
+<br>
+
+**Memento:**
+Stores internal state of the originator object. The state can include any number of state variables.
+The Memento must have two interfaces, an interface to the caretaker. This interface must not allow any operations or any access to internal state stored by the memento and thus maintains the encapsulation. The other interface is Originator and it allows the Originator to access any state variables necessary to the originator to restore the previous state.
+
+**Originator:**
+Creates a memento object that will capture the internal state of Originator.
+Use the memento object to restore its previous state.
+
+**Caretaker:**
+Responsible for keeping the memento.
+The memento is transparent to the caretaker, and the caretaker must not operate on it.
+
+
+### Example for Memento Pattern
+
+<br>
+
+<!-- style="font-size:20px;"-->
+1. [Create an Originator class](#create-an-originator-class)
+
+<!-- style="font-size:20px;"-->
+2. [Create a Memento class](#create-a-memento-class)
+
+<!-- style="font-size:20px;"-->
+3. [Create a Caretaker class](#create-a-caretaker-class)
+
+<!-- style="font-size:20px;"-->
+4. [Create a MementoPatternDemo class](#create-a-mementopatterndemo-class)
+
+
+#### Create an Originator class 
+
+<br>
+
+* Create an Originator class that will use Memento object to restore its previous state.
+
+```java
+//This is a class.  
+  
+public class Originator {  
+      
+       private String state;  
+      
+       public void setState(String state){  
+          this.state = state;  
+       }  
+      
+       public String getState(){  
+          return state;  
+       }  
+      
+       public Memento saveStateToMemento(){  
+          return new Memento(state);  
+       }  
+      
+       public void getStateFromMemento(Memento Memento){  
+          state = Memento.getState();  
+       }  
+}// End of the Originator class. 
+``` 
+
+#### Create a Memento class
+
+<br>
+
+* Create a Memento class that will Store internal state of the Originator object.
+
+```java
+//This is a class.  
+  
+public class Memento {  
+      
+    private String state;  
+  
+    public Memento(String state) {  
+        this.state=state;  
+    }  
+    public String getState() {  
+        return state;  
+    }  
+      
+}// End of the Memento class. 
+``` 
+
+#### Create a Caretaker class
+
+<br>
+
+* Create a Caretaker class that will responsible for keeping the Memento
+
+```java
+//This is a class.  
+  
+import java.util.ArrayList;  
+import java.util.List;  
+  
+  
+public class Caretaker {  
+      
+    private List<Memento> mementoList = new ArrayList<Memento>();  
+  
+       public void add(Memento state){  
+          mementoList.add(state);  
+       }  
+  
+       public Memento get(int index){  
+          return mementoList.get(index);  
+       }  
+  
+}// End of the Caretaker class. 
+``` 
+
+#### Create a MementoPatternDemo class
+
+<br>
+
+```java
+public class MementoPatternDemo {  
+      
+    public static void main(String[] args) {  
+          
+          Originator originator = new Originator();  
+            
+          Caretaker careTaker = new Caretaker();  
+            
+          originator.setState("State #1");  
+          careTaker.add(originator.saveStateToMemento());  
+          originator.setState("State #2");  
+          careTaker.add(originator.saveStateToMemento());  
+          originator.setState("State #3");  
+          careTaker.add(originator.saveStateToMemento());  
+          originator.setState("State #4");  
+  
+          System.out.println("Current State: " + originator.getState());          
+          originator.getStateFromMemento(careTaker.get(0));  
+          System.out.println("First saved State: " + originator.getState());  
+          originator.getStateFromMemento(careTaker.get(1));  
+          System.out.println("Second saved State: " + originator.getState());  
+          originator.getStateFromMemento(careTaker.get(2));  
+          System.out.println("Third saved State: " + originator.getState());  
+       }  
+  
+}  
+// End of the MementoPatternDemo class. 
+``` 
+
+#### Output
+
+<br>
+
+![output](images/dp39.png)
+
 ## Observer Pattern
+
+<br>
+
+* An Observer Pattern says that "just define a one-to-one dependency so that when one object changes state, all its dependents are notified and updated automatically".
+
+* The observer pattern is also known as Dependents or Publish-Subscribe.
+
+<br>
+
+<!-- style="font-size:20px;"-->
+Advantages:
+
+* It describes the coupling between the objects and the observer.
+* It provides the support for broadcast-type communication.
+
+<br>
+
+<!-- style="font-size:20px;"-->
+Usage:
+
+* When the change of a state in one object must be reflected in another object without keeping the objects tight coupled.
+* When the framework we writes and needs to be enhanced in future with new observers with minimal chamges.
+
+
+### UML for Observer Pattern
+
+<br>
+
+![Uml](images/dp40.png)
+
+
+### Example for Observer Pattern
+
+<br>
+
+<!-- style="font-size:20px;"-->
+1. [Create a ResponseHandler1 class](#create-a-responsehandler1-class)
+
+<!-- style="font-size:20px;"-->
+2. [Create a ResponseHandler2 class](#create-a-responsehandler2-class)
+
+<!-- style="font-size:20px;"-->
+3. [Create an EventSource class](#create-an-eventsource-class)
+
+
+#### Create a ResponseHandler1 class
+
+<br>
+
+* Create a ResponseHandler1 class the will implement the java.util.Observer interface.
+
+
+```java
+//This is a class.  
+  
+import java.util.Observable;  
+import java.util.Observer;  
+  
+public class ResponseHandler1 implements Observer {  
+    private String resp;  
+    public void update(Observable obj, Object arg) {  
+        if (arg instanceof String) {  
+            resp = (String) arg;  
+            System.out.println("\nReceived Response: " + resp );  
+        }  
+    }  
+}// End of the ResponseHandler1 interface.  
+```
+
+#### Create a ResponseHandler2 class
+
+<br>
+
+* Create a ResponseHandler2 class the will implement the java.util.Observer interface.
+
+```java
+//This is a class.  
+  
+import java.util.Observable;  
+import java.util.Observer;  
+  
+public class ResponseHandler2 implements Observer {  
+    private String resp;  
+    public void update(Observable obj, Object arg) {  
+        if (arg instanceof String) {  
+            resp = (String) arg;  
+            System.out.println("\nReceived Response: " + resp );  
+        }  
+    }  
+}// End of the ResponseHandler2 interface.
+```
+
+#### Create an EventSource class
+
+<br>
+
+* Create an EventSource class that will extend the java.util.Observable class .
+
+```java
+//This is a class.  
+  
+import java.io.BufferedReader;  
+import java.io.IOException;  
+import java.io.InputStreamReader;  
+import java.util.Observable;  
+  
+public class EventSource extends Observable implements Runnable {  
+    @Override  
+    public void run() {  
+        try {  
+            final InputStreamReader isr = new InputStreamReader(System.in);  
+            final BufferedReader br = new BufferedReader(isr);  
+            while (true) {  
+                String response = br.readLine();  
+                setChanged();  
+                notifyObservers(response);  
+            }  
+        }  
+        catch (IOException e) {  
+            e.printStackTrace();  
+        }  
+    }  
+}// End of the Eventsource class.  d of the ResponseHandler2 interface.
+```
+
+
+#### Output
+
+<br>
+
+![output](images/dp41.png)
+
 
 ## State Pattern
 
+<br>
+
+* A State Pattern says that "the class behavior changes based on its state". 
+* In State Pattern, we create objects which represent various states and a context object whose behavior varies as its state object changes.
+
+* The State Pattern is also known as Objects for States.
+
+<br>
+
+<!-- style="font-size:20px;"-->
+Advantages:
+
+* It keeps the state-specific behavior.
+* It makes any state transitions explicit.
+
+<!-- style="font-size:20px;"-->
+Usage:
+
+* When the behavior of object depends on its state and it must be able to change its behavior at runtime according to the new state.
+* It is used when the operations have large, multipart conditional statements that depend on the state of an object.
+
+
+### UML for State Pattern
+
+<br>
+
+![Uml](images/dp42.png)
+
+
+### Example for State Pattern
+
+<br>
+
+<!-- style="font-size:20px;"-->
+1. [Create a Connection interface ](#create-an-originator-class)
+
+<!-- style="font-size:20px;"-->
+2. [Create an Accounting class](#create-a-memento-class)
+
+<!-- style="font-size:20px;"-->
+3. [Create a Sales class](#create-a-caretaker-class)
+
+<!-- style="font-size:20px;"-->
+4. [Create a Management class](#create-a-mementopatterndemo-clas)
+
+<!-- style="font-size:20px;"-->
+5. [Create a Controller class](#create-a-caretaker-class)
+
+<!-- style="font-size:20px;"-->
+6. [Create a StatePatternDemo class](#create-a-caretaker-class)
+
+
+
+#### Create a Connection interface
+
+<br>
+
+* Create a Connection interface that will provide the connection to the Controller class.
+
+```java
+//This is an interface.  
+  
+public interface Connection {  
+  
+       public void open();  
+       public void close();  
+       public void log();  
+       public void update();  
+}// End of the Connection interface.
+```  
+
+#### Create an Accounting class
+
+<br>
+
+* Create an Accounting class that will implement to the Connection interface.
+
+```java
+//This is a class.  
+public class Accounting implements Connection {  
+      
+       @Override  
+       public void open() {  
+          System.out.println("open database for accounting");  
+       }  
+       @Override  
+       public void close() {  
+          System.out.println("close the database");  
+       }  
+         
+       @Override  
+       public void log() {  
+          System.out.println("log activities");  
+       }  
+         
+       @Override  
+       public void update() {  
+           System.out.println("Accounting has been updated");  
+       }  
+}// End of the Accounting class.
+```
+
+#### Create a Sales class
+
+<br>
+
+* Create a Sales class that will implement to the Connection interface.
+
+```java
+//This is a class.  
+public class Sales implements Connection {  
+      
+      @Override  
+       public void open() {  
+          System.out.println("open database for sales");  
+       }  
+       @Override  
+       public void close() {  
+          System.out.println("close the database");  
+       }  
+         
+       @Override  
+       public void log() {  
+          System.out.println("log activities");  
+       }  
+         
+       @Override  
+       public void update() {  
+           System.out.println("Sales has been updated");  
+       }  
+  
+}// End of the Sales class.
+```  
+
+
+#### Create a Management class
+
+<br>
+
+* Create a Management class that will implement to the Connection interface.
+
+
+```java
+//This is a class.  
+   
+public class Management implements Connection {  
+      
+      @Override  
+       public void open() {  
+          System.out.println("open database for Management");  
+       }  
+       @Override  
+       public void close() {  
+          System.out.println("close the database");  
+       }  
+         
+       @Override  
+       public void log() {  
+          System.out.println("log activities");  
+       }  
+         
+       @Override  
+       public void update() {  
+           System.out.println("Management has been updated");  
+       }  
+  
+}  
+ // End of the Management class.
+```  
+
+#### Create a Controller class
+
+<br>
+
+* Create a Controller class that will use the Connection interface for connecting with different types of connection.
+
+```java
+//This is a class.  
+  
+public class Controller {  
+      
+       public static Accounting acct;  
+       public static Sales sales;  
+       public static Management management;  
+         
+       private static Connection con;  
+         
+       Controller() {  
+           acct = new Accounting();  
+           sales = new Sales();  
+           management = new Management();  
+       }  
+      
+       public void setAccountingConnection() {  
+           con = acct;  
+       }  
+       public void setSalesConnection() {  
+           con  = sales;  
+       }  
+       public void setManagementConnection() {  
+           con  = management;  
+       }  
+       public void open() {  
+           con .open();  
+       }  
+       public void close() {  
+           con .close();  
+       }  
+       public void log() {  
+           con .log();  
+       }  
+       public void update() {  
+           con .update();  
+       }  
+         
+  
+}// End of the Controller class. 
+``` 
+
+#### Create a StatePatternDemo class
+
+<br>
+
+* Create a StatePatternDemo class.
+
+```java
+//This is a class.  
+  
+public class StatePatternDemo {  
+  
+       Controller controller;  
+       StatePatternDemo(String con) {  
+          controller = new Controller();  
+          //the following trigger should be made by the user  
+          if(con.equalsIgnoreCase("management"))  
+             controller.setManagementConnection();  
+          if(con.equalsIgnoreCase("sales"))  
+             controller.setSalesConnection();  
+          if(con.equalsIgnoreCase("accounting"))  
+                 controller.setAccountingConnection();  
+          controller.open();  
+          controller.log();  
+          controller.close();  
+          controller.update();  
+       }  
+         
+         
+       public static void main(String args[]) {  
+  
+           new StatePatternDemo(args[0]);  
+             
+       }  
+  
+}// End of the StatePatternDemo class.
+```  
+
+#### Output
+
+<br>
+
+![output](images/dp43.png)
+
+
 ## Strategy Pattern
+
+<br>
+
+* A Strategy Pattern says that "defines a family of functionality, encapsulate each one, and make them interchangeable".
+
+* The Strategy Pattern is also known as Policy.
+
+<br>
+
+<!-- style="font-size:20px;"-->
+Advantages:
+
+* It provides a substitute to subclassing.
+* It defines each behavior within its own class, eliminating the need for conditional statements.
+* It makes it easier to extend and incorporate new behavior without changing the application.
+
+<!-- style="font-size:20px;"-->
+Usage:
+
+* It is used when the multiple classes differ only in their behaviors.e.g. Servlet API.
+* It is used when you need different variations of an algorithm.
+
+<br>
+
+![pattern](images/dp44.png)
+
+
+### UML for Strategy Pattern
+
+<br>
+
+![Uml](images/dp45.png)
+
+
+### Example for Strategy Pattern
+
+<br>
+
+<!-- style="font-size:20px;"-->
+1. [Create a Strategy interface](#create-a-strategy-interface)
+
+<!-- style="font-size:20px;"-->
+2. [Create a Addition class](#create-a-addition-class)
+
+<!-- style="font-size:20px;"-->
+3. [Create a Subtraction class](#create-a-subtraction-class)
+
+<!-- style="font-size:20px;"-->
+4. [Create a Multiplication class](#create-a-multiplication-class)
+
+<!-- style="font-size:20px;"-->
+5. [Create a Context class](#create-a-context-class)
+
+<!-- style="font-size:20px;"-->
+6. [Create a StartegyPatternDemo class](#create-a-startegypatterndemo-class)
+
+
+#### Create a Strategy interface
+
+<br>
+
+```java
+//This is an interface.  
+  
+public interface Strategy {  
+      
+    public float calculation(float a, float b);  
+  
+}// End of the Strategy interface.
+```  
+
+#### Create a Addition class
+
+<br>
+
+* Create a Addition class that will implement Startegy interface.
+
+```java
+//This is a class.  
+public class Addition implements Strategy{  
+  
+    @Override  
+    public float calculation(float a, float b) {  
+        return a+b;  
+    }  
+  
+}// End of the Addition class. 
+``` 
+
+#### Create a Subtraction class
+
+<br>
+
+* Create a Subtraction class that will implement Startegy interface.
+
+```java
+//This is a class.  
+public class Subtraction  implements Strategy{  
+  
+    @Override  
+    public float calculation(float a, float b) {  
+        return a-b;  
+    }  
+  
+}// End of the Subtraction class.
+```  
+
+#### Create a Multiplication class
+
+<br>
+
+* Create a Multiplication class that will implement Startegy interface.
+
+```java
+//This is a class.  
+  
+public class Multiplication implements Strategy{  
+  
+    @Override  
+    public float calculation(float a, float b){  
+        return a*b;  
+    }  
+}// End of the Multiplication class. 
+``` 
+
+#### Create a Context class
+
+<br>
+
+* Create a Context class that will ask from Startegy interface to execute the type of strategy.
+
+```java
+//This is a class.  
+  
+  
+public class Context {  
+  
+       private Strategy strategy;  
+       
+       public Context(Strategy strategy){  
+          this.strategy = strategy;  
+       }  
+  
+       public float executeStrategy(float num1, float num2){  
+          return strategy.calculation(num1, num2);  
+       }  
+}// End of the Context class. 
+``` 
+
+#### Create a StartegyPatternDemo class
+
+<br>
+
+```java
+//This is a class.  
+import java.io.BufferedReader;  
+import java.io.IOException;  
+import java.io.InputStreamReader;  
+  
+public class StrategyPatternDemo {  
+      
+    public static void main(String[] args) throws NumberFormatException, IOException {  
+          
+          BufferedReader br=new BufferedReader(new InputStreamReader(System.in));  
+          System.out.print("Enter the first value: ");  
+          float value1=Float.parseFloat(br.readLine());  
+          System.out.print("Enter the second value: ");  
+          float value2=Float.parseFloat(br.readLine());  
+          Context context = new Context(new Addition());          
+          System.out.println("Addition = " + context.executeStrategy(value1, value2));  
+  
+          context = new Context(new Subtraction());       
+          System.out.println("Subtraction = " + context.executeStrategy(value1, value2));  
+  
+          context = new Context(new Multiplication());        
+          System.out.println("Multiplication = " + context.executeStrategy(value1, value2));  
+       }  
+  
+}// End of the StrategyPatternDemo class.
+```  
 
 ## Template Pattern
 
-## Visitor Pattern
+<br>
 
-## Null Object
+* A Template Pattern says that "just define the skeleton of a function in an operation, deferring some steps to its subclasses".
+
+<br>
+
+<!-- style="font-size:20px;"-->
+Advantages:
+
+* It is very common technique for reusing the code.This is only the main benefit of it.
+
+<br>
+
+<!-- style="font-size:20px;"-->
+Usage:
+
+* It is used when the common behavior among sub-classes should be moved to a single common class by avoiding the duplication.
+
+### UML for Template Pattern
+
+<br>
+
+![Uml](images/dp47.png)
+
+
+### Example for Template Pattern
+
+<br>
+
+<!-- style="font-size:20px;"-->
+1. [Create a Game abstract class](#create-a-game-abstract-class)
+
+<!-- style="font-size:20px;"-->
+2. [Create a Chess class](#create-a-chess-class)
+
+<!-- style="font-size:20px;"-->
+3. [Create a Soccer class](#create-a-soccer-class)
+
+<!-- style="font-size:20px;"-->
+4. [Create a TemplatePatternDemo class](#create-a-templatepatterndemo-class)
+
+
+#### Create a Game abstract class
+
+<br>
+
+```java
+//This is an abstract class.  
+public abstract class Game {  
+      
+       abstract void initialize();  
+       abstract void start();  
+       abstract void end();  
+      
+       public final void play(){  
+  
+          //initialize the game  
+          initialize();  
+  
+          //start game  
+          start();  
+            
+          //end game  
+          end();  
+       }  
+}// End of the Game abstract class. 
+``` 
+
+#### Create a Chess class
+
+<br>
+
+* Create a Chess class that will extend Game abstract class for giving the definition to its method.
+
+```java
+//This is a class.  
+  
+public class Chess extends Game {  
+     @Override  
+       void initialize() {  
+          System.out.println("Chess Game Initialized! Start playing.");  
+       }  
+     @Override  
+       void start() {  
+          System.out.println("Game Started. Welcome to in the chess game!");  
+       }  
+    @Override  
+       void end() {  
+          System.out.println("Game Finished!");  
+       }  
+}// End of the Chess class.
+```  
+
+#### Create a Soccer class
+
+<br>
+
+* Create a Soccer class that will extend Game abstract class for giving the definition to its method.
+
+```java
+//This is a class.  
+  
+  
+public class Soccer extends Game {  
+      
+    @Override  
+       void initialize() {  
+          System.out.println("Soccer Game Initialized! Start playing.");  
+       }  
+  
+    @Override  
+       void start() {  
+          System.out.println("Game Started. Welcome to in the Soccer game!");  
+       }  
+         
+    @Override  
+       void end() {  
+          System.out.println("Game Finished!");  
+       }  
+}// End of the Soccer class.
+```
+
+#### Create a TemplatePatternDemo class
+
+<br>
+
+```java
+//This is a class.  
+public class TemplatePatternDemo {  
+  
+public static void main(String[] args) throws InstantiationException, IllegalAccessException, ClassNotFoundException {  
+          
+         Class c=Class.forName(args[0]);  
+         Game game=(Game) c.newInstance();  
+         game.play();     
+       }  
+}// End of the Soccer class.
+```  
+
+#### Output
+
+<br>
+
+![output](images/dp48.png)
+
+
+
 
 
