@@ -4,6 +4,72 @@
 ![design pattern](images/dp1.png)
 
 
+# Table Of Contents
+
+<br>
+
+1. [Introduction](#introduction)
+
+2. [Categorization of design patterns](#categorization-of-design-patterns)
+
+3. [Core Java Design Patterns](#core-java-design-patterns)
+
+4. [Creational Design Pattern](#creational-design-pattern)
+
+    * [Factory Pattern](#factory-method-pattern)
+
+    * [Abstract Factory Pattern](#abstract-factory-pattern)
+
+    * [Singleton Pattern](#singleton-design-pattern-in-java)
+
+    * [Prototype Pattern](#prototype-design-pattern)
+
+    * [Builder Pattern](#builder-design-pattern)
+
+5. [Structural design patterns](#structural-design-patterns)
+
+    * [Adapter Pattern](#adapter-pattern)
+
+    * [Bridge Pattern](#bridge-pattern)
+
+    * [Composite Pattern](#composite-pattern)
+
+    * [Decorator Pattern](#decorator-pattern)
+
+    * [Facade Pattern](#facade-pattern)
+
+    * [Flyweight Pattern](#flyweight-pattern)
+
+    * [Proxy Pattern](#proxy-pattern)
+
+
+6. [Behavioral Design Pattern](#behavioral-design-patterns)
+
+    * [Chain Of Responsibility Pattern](#chain-of-responsibility-pattern)
+
+    * [Command Pattern](#command-pattern)
+
+    * [Interpreter Pattern](#interpreter-pattern)
+
+    * [Iterator Pattern](#iterator-pattern)
+
+    * [Mediator Pattern](#mediator-pattern)
+
+    * [Memento Pattern](#memento-pattern)
+
+    * [Observer Pattern](#observer-pattern)
+
+    * [State Pattern](#state-pattern)
+
+    * [Strategy Pattern](#strategy-pattern)
+
+    * [Template Pattern](#template-pattern)
+
+
+7. [References](#references)
+
+
+
 # Introduction
 
 <br>
@@ -279,6 +345,25 @@ class GenerateBill{
 #### OUTPUT 
 
 ![output](images/dp3.png)
+
+
+### Pros and Cons
+
+<br>
+
+<!-- style="font-size:20px"-->
+Pros
+
+ * You avoid tight coupling between the creator and the concrete products.
+ * Single Responsibility Principle. You can move the product creation code into one place in the program, making the code easier to support.
+ * Open/Closed Principle. You can introduce new types of products into the program without breaking existing client code.
+
+ <br>
+
+<!-- style="font-size:20px"-->
+ Cons
+
+ * The code may become more complicated since you need to introduce a lot of new subclasses to implement the pattern. The best case scenario is when you’re introducing the pattern into an existing hierarchy of creator classes.
 
 
 ## Abstract Factory Pattern
@@ -606,6 +691,26 @@ AbstractFactory loanFactory = FactoryCreator.getFactory("Loan");
 ![output](images/dp5.png)
 
 
+### Pros and Cons
+
+<br>
+
+<!-- style="font-size:20px"-->
+Pros
+
+ * You can be sure that the products you’re getting from a factory are compatible with each other.
+ * You avoid tight coupling between concrete products and client code.
+ * Single Responsibility Principle. You can extract the product creation code into one place, making the code easier to support.
+ * Open/Closed Principle. You can introduce new variants of products without breaking existing client code.
+
+ <br>
+
+<!-- style="font-size:20px"-->
+ Cons
+
+ * The code may become more complicated than it should be, since a lot of new interfaces and classes are introduced along with the pattern.
+
+
 ## Singleton design pattern in Java
 
 <br>
@@ -758,6 +863,29 @@ https://github.com/dharmananda4444/Design-Patterns/tree/version-1.0/code/singlet
 ![output3](images/dp10.png)
 
 
+### Pros and Cons
+
+<br>
+
+<!-- style="font-size:20px"-->
+Pros
+
+ * You can be sure that a class has only a single instance.
+ * You gain a global access point to that instance.
+ * The singleton object is initialized only when it’s requested for the first time.
+
+ <br>
+
+<!-- style="font-size:20px"-->
+ Cons
+
+ * Violates the Single Responsibility Principle. The pattern solves two problems at the time.
+ * The Singleton pattern can mask bad design, for instance, when the components of the program know too much about each other.
+ * The pattern requires special treatment in a multithreaded environment so that multiple threads won’t create a singleton object several times.
+ * It may be difficult to unit test the client code of the Singleton because many test frameworks rely on inheritance when producing mock objects. Since the constructor of the singleton class is private and overriding static methods is impossible in most languages, you will need to think of a creative way to mock the singleton. Or just don’t write the tests. Or don’t use the Singleton pattern.
+ Relations with Other Patterns
+
+
 ## Prototype Design Pattern
 
 <br>
@@ -901,6 +1029,26 @@ class PrototypeDemo{
 ### Output
 
 ![output](images/dp12.png)
+
+
+### Pros and Cons
+
+<br>
+
+<!-- style="font-size:20px"-->
+Pros
+
+ * You can clone objects without coupling to their concrete classes.
+ * You can get rid of repeated initialization code in favor of cloning pre-built prototypes.
+ * You can produce complex objects more conveniently.
+ * You get an alternative to inheritance when dealing with configuration presets for complex objects.
+
+ <br>
+
+<!-- style="font-size:20px"-->
+ Cons
+
+ * Cloning complex objects that have circular references might be very tricky.
 
 
 ## Builder Design Pattern
@@ -1093,6 +1241,25 @@ public class BuilderDemo{
 CD name : Sony CD, Price : 20  
 CD name : Samsung CD, Price : 15 
 ``` 
+
+### Pros and Cons
+
+<br>
+
+<!-- style="font-size:20px"-->
+Pros
+
+ * You can construct objects step-by-step, defer construction steps or run steps recursively.
+ * You can reuse the same construction code when building various representations of products.
+ * Single Responsibility Principle. You can isolate complex construction code from the business logic of the product.
+
+ <br>
+
+<!-- style="font-size:20px"-->
+ Cons
+
+ * The overall complexity of the code increases since the pattern requires creating multiple new classes.
+
 
 ## Object Pool Pattern
 
@@ -1409,6 +1576,18 @@ public class ObjectPoolDemo{
 ![output](images/dp15.png)
 
 
+## References
+
+<br>
+
+<!-- style="font-size:20px;"--> 
+https://www.javatpoint.com/creational-design-patterns
+
+<!-- style="font-size:20px;"--> 
+https://refactoring.guru/design-patterns/creational-patterns
+
+
+
 
 # Structural design patterns
 
@@ -1644,6 +1823,24 @@ public class AdapterPatternDemo {
 ![output](images/dp17.png)
 
 
+### Pros and Cons
+
+<br>
+
+<!-- style="font-size:20px"-->
+Pros
+
+ * Single Responsibility Principle. You can separate the interface or data conversion code from the primary business logic of the program.
+ * Open/Closed Principle. You can introduce new types of adapters into the program without breaking the existing client code, as long as they work with the adapters through the client interface.
+
+ <br>
+
+<!-- style="font-size:20px"-->
+ Cons
+
+ * The overall complexity of the code increases because you need to introduce a set of new interfaces and classes. Sometimes it’s simpler just to change the service class so that it matches the rest of your code.
+
+
 ## Bridge Pattern
 
 <br>
@@ -1847,6 +2044,26 @@ public class BridgePatternDemo {
 <br>
 
 ![output](images/dp19.png)
+
+
+### Pros and Cons
+
+<br>
+
+<!-- style="font-size:20px"-->
+Pros
+
+ * You can create platform-independent classes and apps.
+ * The client code works with high-level abstractions. It isn’t exposed to the platform details.
+ * Open/Closed Principle. You can introduce new abstractions and implementations independently from each other.
+ * Single Responsibility Principle. You can focus on high-level logic in the abstraction and on platform details in the implementation.
+
+ <br>
+
+<!-- style="font-size:20px"-->
+ Cons
+
+ * You might make the code more complicated by applying the pattern to a highly cohesive class.
 
 
 ## Composite Pattern
@@ -2782,6 +2999,17 @@ public class ProxyPatternClient {
 <br>
 
 ![output](images/dp27.png)
+
+
+## References
+
+<br>
+
+<!-- style="font-size:20px;"-->
+https://www.javatpoint.com/structural-design-patterns
+
+<!-- style="font-size:20px;"-->
+https://refactoring.guru/design-patterns/structural-patterns
 
 
 # Behavioral Design Patterns
@@ -4641,6 +4869,15 @@ public static void main(String[] args) throws InstantiationException, IllegalAcc
 
 ![output](images/dp48.png)
 
+# References
+
+<br>
+
+<!-- style="font-size:20px;"-->
+https://www.javatpoint.com/behavioral-design-patterns
+
+<!-- style="font-size:20px;"-->
+https://refactoring.guru/design-patterns
 
 
 
